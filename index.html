@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Truth or Dare Picker</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        button {
+            padding: 15px 30px;
+            background-color: white;
+            color: #2575fc;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 0 6px;
+        }
+
+        button:hover {
+            background-color: #e0e0e0;
+        }
+
+        #truth {
+            margin-top: 30px;
+            font-size: 1.3em;
+            max-width: 700px;
+            line-height: 1.5;
+        }
+
+        #left {
+            margin-top: 10px;
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Teresa is so smart</p>
+    <h1>🎲 Random Truth Generator</h1>
+    <div>
+        <button onclick="showTruth()">Show Truth</button>
+        <button onclick="resetPool()" title="Start over">Reset</button>
+    </div>
+    <div id="left"></div>
+    <p id="truth"></p>
+
+    <script>
+        const truths = [
+            "What’s the dumbest thing you’ve ever done in front of a crush?",
+            "Who here do you think is the best-looking?",
+            "Who’s your current celebrity crush?",
+            "What’s one secret you’ve kept from your parents?",
+            "Who in this group do you trust the least with a secret?",
+            "What’s a secret you’ve kept from everyone in this room?",
+            "Who’s the last person you stalked online?",
+            "Who's the last person you searched on Instagram?",
+            "What's your biggest insecurity?",
+            "If you had to marry someone in this room, who would it be and why ? (but like...not gay)",
+            "What’s your biggest red flag?",
+            "Who was your last text to, and what did it say?",
+            "What’s your dream date idea?",
+            "What’s something you’ve done that you still feel guilty about?",
+            "What’s something embarrassing on your camera roll right now?",
+            "What’s the last thing you searched on your phone?",
+            "What’s your go-to excuse for being late?",
+            "What’s a guilty pleasure you’re slightly embarrassed to admit?",
+            "Have you ever had a crush on a friend's ex (even before they dated)?",
+            "Who’s someone you’ve had a crush on but never told anyone about (until now 👀)?",
+            "What’s a compliment from your crush that you still remember?",
+            "What is your love language?"
+
+        ];
+
+        let remainingTruths = [...truths]; // ✅ use the correct variable name
+
+        function updateLeft() {
+            document.getElementById("left").textContent =
+                `${remainingTruths.length} left`;
+        }
+
+        function showTruth() {
+            if (remainingTruths.length === 0) {
+                alert("You've gone through all the truths! Resetting the list 🔁");
+                resetPool();
+            }
+            const randomIndex = Math.floor(Math.random() * remainingTruths.length);
+            const truth = remainingTruths.splice(randomIndex, 1)[0];
+            document.getElementById("truth").textContent = truth;
+            updateLeft();
+        }
+
+        function resetPool() {
+            remainingTruths = [...truths];
+            document.getElementById("truth").textContent = "";
+            updateLeft();
+        }
+
+        // init
+        updateLeft();
+    </script>
+</body>
+
+</html>
